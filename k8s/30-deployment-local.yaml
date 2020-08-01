@@ -2,26 +2,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: minecraft-server
+  name: nockstar-server
   namespace: minecraft
   labels:
-    app: minecraft-server
+    app: nockstar-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: minecraft-server
+      app: nockstar-server
   template:
     metadata:
       labels:
-        app: minecraft-server
+        app: nockstar-server
     spec:
       volumes:
       - name: minecraft-data
         persistentVolumeClaim:
-          claimName: minecraft-data-pvc
+          claimName: nockstar-data-pvc
       containers:
-      - name: minecraft-server
+      - name: nockstar-server
         image: itzg/minecraft-server:latest
         resources:
           limits:
@@ -32,9 +32,9 @@ spec:
           - name:  EULA
             value: 'TRUE'
           - name: MODE
-            value: creative
+            value: survival
           - name: MOTD
-            value: Your super-cool minecraft server
+            value: Sixten, William, Edward och pappas server
           - name: ALLOW_FLIGHT
             value: 'TRUE'
         ports:

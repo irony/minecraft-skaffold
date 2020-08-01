@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: kubernetes-minecraft-server
+deploy:
+  kubectl:
+    manifests:
+    - k8s/00-namespace.yaml
+    - k8s/10-volume-claim-local.yaml
+    - k8s/20-volume-local.yaml
+    - k8s/30-deployment-local.yaml
+    - k8s/40-service-nodeport.yaml

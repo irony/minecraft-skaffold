@@ -1,10 +1,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: minecraft-data-pvc
+  name: nockstar-data-pvc
   namespace: minecraft
 spec:
-  storageClassName: local-storage
   accessModes:
     - ReadWriteOnce
   resources:
