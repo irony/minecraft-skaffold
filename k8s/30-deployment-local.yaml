@@ -1,6 +1,6 @@
 # docker run -d -it -v /path/on/host:/data -e EULA=TRUE -p 25565:25565 --name mc itzg/minecraft-server
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: nockstar-server
   namespace: minecraft
@@ -8,6 +8,7 @@ metadata:
     app: nockstar-server
 spec:
   replicas: 1
+  serviceName: nockstar-server
   selector:
     matchLabels:
       app: nockstar-server
@@ -24,8 +25,6 @@ spec:
       - name: nockstar-server
         image: itzg/minecraft-server:latest
         resources:
-          limits:
-            memory: 2Gi
           requests:
             memory: 1.5Gi
         env:
@@ -34,9 +33,11 @@ spec:
           - name: MODE
             value: survival
           - name: MOTD
-            value: Sixten, William, Edward och pappas server
+            value: Borjessonsvagen
           - name: ALLOW_FLIGHT
             value: 'TRUE'
+          - name: OPS
+            value: MuLvAd69
         ports:
         - containerPort: 25565
           name: minecraft
@@ -46,16 +47,16 @@ spec:
         readinessProbe:
           exec:
             command:
-            - mcstatus
-            - 127.0.0.1
-            - ping
+              - mcstatus
+              - 127.0.0.1
+              - ping
           initialDelaySeconds: 30
           periodSeconds: 30
         livenessProbe:
           exec:
             command:
-            - mcstatus
-            - 127.0.0.1
-            - ping
+              - mcstatus
+              - 127.0.0.1
+              - ping
           initialDelaySeconds: 30
           periodSeconds: 30
