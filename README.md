@@ -47,13 +47,16 @@ change environment variables for your purposes. See lines 30-35 for examples. Se
 
 Now, apply the configuration to Kubernetes
 
+Either use the following command:
 ```bash
-kubectl apply -f 00-namespace.yaml
-kubectl apply -f 10-volume-claim-local.yaml
-kubectl apply -f 20-volume-local.yaml
-kubectl apply -f 30-deployment-local.yaml
-kubectl apply -f 40-service-nodeport.yaml
+kubectl apply -f k8s
 ```
+
+Or if you use skaffold, run this:
+```bash
+skaffold run
+```
+
 
 ### Step 4: Connect
 
@@ -61,13 +64,4 @@ We have created a node-port service, which means
 that you can connect to any node in your kubernetes cluster on port `30565` (declared in [40-service-nodeport.yaml](40-service-nodeport.yaml#L12)) to attach to this minecraft server. Suppose that your kubernetes node has a public
 ip address of 192.168.1.203.  When you configure your
 minecraft server, connect to `192.168.1.203:30565`
-
-
-Invitation to Help
-------
-
-Running on GKE: If anyone is interested in figuring this out the details to make this work
-on Google Cloud GKE or Azure AKS, please send me a PR.
-
-Helm Chart: If anyone wants to turn this into a Helm chart, that would be pretty cool.
 
