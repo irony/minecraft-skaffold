@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nockstar-data
+  name: minecraft-data
   namespace: minecraft
 spec:
   capacity:
